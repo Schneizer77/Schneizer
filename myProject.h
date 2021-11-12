@@ -1,7 +1,5 @@
-#ifndef _MY_PROJECT_H_
-#define _MY_PROJECT_H_
-
-void printMyName1();
-void printMyName2();
-
+#ifndef MYPROJECT_H
+#define MYPROJECT_H
+int printMyName1();
+int printMyName2();
 #endif
