@@ -2,5 +2,5 @@ include <stdio.h>
 
 int main(void)
 {
-	printf("hello Schneizer!\r\n");
+	printf("hello embedded!\r\n");
 }
