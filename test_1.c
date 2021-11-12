@@ -2,5 +2,5 @@ include <stdio.h>
 
 int main(void)
 {
-	printf("hello embedded!\r\n");
+	printf("이름바꿈\r\n");
 }
