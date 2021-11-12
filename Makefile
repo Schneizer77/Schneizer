@@ -12,4 +12,4 @@ main.o: myProject.h
 2.o: 2.c myProject.h
 	gcc -c 2.c -o 2.o
 clean:
-	rm -rf  *.o 
+	rm -rf *.o
