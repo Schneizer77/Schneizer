@@ -2,5 +2,5 @@
 
 int main(void)
 {
-	printf("이름바꿈\r\n");
+	printf("이asdfdsfsdfs름바꿈\r\n");
 }
