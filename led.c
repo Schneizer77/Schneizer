@@ -32,7 +32,7 @@ int ledLibOnOff(int ledNumber, int onOff) //이 함수는 ledNumber에는 0~7d�
 	return 1;
 }
 
-int ledLibStatus(void)	//현재 LED상태 확인. 모든 LED가 켜져있으면 0xff를 리턴하고,
+int ledLibStatus(void)	//현재 LED상태 확인. 모든 LED가 켜져있으면 0xff를 리턴하고, 
 {
 	return ledStatus;
 }
