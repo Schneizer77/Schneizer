@@ -21,7 +21,6 @@ int main (void)
 		
 		ledLibOnOff(i, 0);
 		sleep(1);
-		
 	}
 	ledLibBlink(5, 10, 100); //1번 LED를 100ms로 10번 깜빡임.
 	
