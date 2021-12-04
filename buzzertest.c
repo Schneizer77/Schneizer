@@ -12,6 +12,7 @@
 #define BUZZER_FREQUENCY_NAME	"frequency"
 char gBuzzerBaseSysDir[128];
 
+
 const int musicScale[MAX_SCALE_STEP] =
 {
 	262, // do
