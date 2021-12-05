@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <dirent.h>
 #include "buzzer.h"
-
 int buzzerInit(void)
 {
 
