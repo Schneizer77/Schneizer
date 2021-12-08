@@ -1,2 +1,0 @@
-#ifndef _COLORLED_LIBRARY_H_
-#define _COLORLED_LIBRARY_H_
