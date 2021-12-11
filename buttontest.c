@@ -1,88 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <linux/input.h>
 #include <unistd.h>
-#include <fcntl.h>
-#include <sys/ioctl.h> 
+#include <sys/msg.h>
 
-#define  INPUT_DEVICE_LIST	"/dev/input/event"
-#define PROB_FILE	"/proc/bus/input/devices"
-
-int probeButtonPath(char *newPath)
+typedef struct
 {
+	long int messageType;
+	char bulk_message[1000];
+} structMyMsg;
+
+static int cmp1, cmp2, cmp3,cmp4 ,cmp5, cmp6, cmp7, cmp8;  //두 문자열이 같으면 cmp = 0
+
+int main (void)
+{
+	structMyMsg messageRxData;
+	int msgID = msgget((key_t)9999, IPC_CREAT|0666);
+		if(msgID == -1){                               //우체통 생성 확인
+			printf("Cannot get msgQueueID\n"); 
+			return -1;
+		}
+
+while (1) {
 	int returnValue = 0;
-	int number = 0;
-	FILE *fp = fopen(PROBE_FILE, "rt");
-#define HAVE_TO_FIND_1	"N: Name=\"ecube-button\"\n"
-#define HAVE_TO_FIND_2	"H: Handlers=kbd event"
-	while(!feof(fp))
-	{
-		char tmpStr[200];
-		fgets(tmpStr, 200, fp);
-		if (strcmp(tmpStr, HAVE_TO_FIND_1) == 0)
-		{
-			printf("YES! I found!: $s\r\n", tmpStr);
-			returnValue = 1;
-		}
-		if((returnValue == 1) && (strncasecmp(tmpStr, HAVE_TO_FIND_2, strlen(HAVE_TO_FIND_2)) == 0))
-		{
-			printf ("-->%s", tmpStr);
-			printf("\t%c\r\n", tmpStr[strlen(tmpStr) - 3]);
-			number = tmpStr[strlen(tmpStr) - 3] - '0';
-			break;
-		}
-	}
-	fclose(fp);
-	if (returnValue == 1)
-	sprintf (newPath, "%s%d", INPUT_DEVICE_LIST, number);
-	return returnValue;
+	returnValue = msgrcv(msgID, &messageRxData, sizeof(messageRxData.bulk_message), 0, 0); //Wait here if no message
+
+	cmp1 = strcmp(messageRxData.bulk_message, "1");
+	cmp2 = strcmp(messageRxData.bulk_message, "2");
+	cmp3 = strcmp(messageRxData.bulk_message, "3");
+	cmp4 = strcmp(messageRxData.bulk_message, "4");
+	cmp5 = strcmp(messageRxData.bulk_message, "5");
+	cmp6 = strcmp(messageRxData.bulk_message, "6");
+	cmp7 = strcmp(messageRxData.bulk_message, "7");
+	cmp8 = strcmp(messageRxData.bulk_message, "8");
+
+
+	if(cmp1==0)
+		printf("button1 ");
+	else if (cmp2==0)
+		printf("button2 ");
+	else if (cmp3==0)
+		printf("button3 ");
+	else if (cmp4==0)
+		printf("button4 ");
+	else if (cmp5==0)
+		printf("button5 ");
+	else if (cmp6==0)
+		printf("button6 ");
+	else if (cmp7==0)
+		printf("pressed\n");
+	else if (cmp8==0)
+		printf("released\n");
 }
 
-int main(int argc, char *argv[])
-{
-	int    fp;
-	int		readSize,inputIndex;
-	struct input_event  stEvent;
-	char inputDevPath[200] = {0,};
-	if (probeButtonPath(inputDevPath) == 0)
-	{
-		printf ("ERROR! File Not Found!\r\n");
-		printf ("Did you insmod?\r\n");
-		return 0;
-	}
-	
-	fp = open(INPUT_DEVICE_LIST, O_RDONLY);
-	
-	while(1)
-	{
-		readSize = read(fp, &stEvent , sizeof(stEvent));
-		if (readSize != sizeof(stEvent))
-		{
-			continue;
-		}
 
-		if ( stEvent.type == EV_KEY)
-		{
-			printf("EV_KEY(");
-			switch(stEvent.code)
-			{
-				case KEY_VOLUMEUP:	printf("Volume up key):");	break;
-				case KEY_HOME:		printf("Home key):");		break;
-				case KEY_SEARCH:	printf("Search key):");		break;
-				case KEY_BACK:		printf("Back key):");		break;
-				case KEY_MENU:		printf("Menu key):");		break;
-				case KEY_VOLUMEDOWN:printf("Volume down key):");break;
-			}
-			if (stEvent.value)
-				printf("pressed\n");
-			else
-				printf("released\n");
-		}
-		else 
-		{
-			// do notthing
-		}
-	}
-	close(fp);		
+
+
 }
