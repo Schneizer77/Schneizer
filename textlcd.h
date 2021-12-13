@@ -1,4 +1,3 @@
-
 #ifndef __TEXTLCD_DRV_H__
 #define __TEXTLCD_DRV_H__
 
@@ -41,16 +40,9 @@ typedef struct TextLCD_tag
 	char	TextData[LINE_NUM][LINE_BUFF_NUM];
 }stTextLCD,*pStTextLCD;
 
+int lcdtextInit(void);
+int lcdtextWrite(unsigned int linenum, char *data);
+int lcdtextOff(void);
+
 
 #endif//  __TEXTLCD_DRV_H__
-
-
-
-
-
-
-
-
-
-
-
