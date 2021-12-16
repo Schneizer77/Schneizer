@@ -116,3 +116,4 @@ int lcdtextOff(void)
 	return 0;
 
 }
+// 출처: github.com/euleey/embedded_R
