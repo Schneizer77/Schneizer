@@ -74,3 +74,4 @@ int ledLibMorseBlink(int ledNumber, int nth, int msecOn, int msecOff)
 		usleep(1000*msecOff);	
 	}
 }
+//출처: github.com/euleey/embedded_R
