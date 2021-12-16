@@ -15,9 +15,6 @@
 #include "fnd.h"
 #include "textlcd.h"
 
-static int msgID = 0;
-static int msgIDTouch = 0;
-int Messageclean = 0;
 static int ledvalue;
 void *piano();
 int play;
@@ -29,17 +26,14 @@ int check;
 int main(void)
 {   
     /*터치스크린 깨짐방지*/
-    int conFD = open ("/dev/tty0", O_RDWR);
-    ioctl(conFD, KDSETMODE, KD_GRAPHICS);
-    close (conFD);
+    int TSD = open ("/dev/tty0", O_RDWR);
+    ioctl(TSD, KDSETMODE, KD_GRAPHICS);
+    close (TSD);
     
     /*init*/
     textlcdinit();
-    msgID=buttonLibInit();
     buzzerInit();
     ledLibInit();
-    msgIDTouch=TouchLibInit();
-    Colorledinit();
 
     while(1){}
     TouchLibExit();
@@ -54,7 +48,6 @@ void *piano()
 {
     lcdtextwrite("1", "     PIANO     ");
     lcdtextwrite("2", "===============");
-    print_bmp("./bmp/piano.bmp");
 
     while(check==1){
 		if((x > 0) && (x < 100) && (y > 0) && (y < 200)){	//건반 범위, 도
