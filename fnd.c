@@ -101,3 +101,4 @@ int fndOff(void)
 	close(fd);
 	return 1;
 }
+// 출처: github.com/euleey/embedded_R
