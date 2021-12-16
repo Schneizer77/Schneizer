@@ -69,3 +69,4 @@ double temp = (double)value*0.0625;
 printf("Current Temp: %lf \n", temp);
 return temp;
 }
+// 출처: github.com/euleey/embedded_R
